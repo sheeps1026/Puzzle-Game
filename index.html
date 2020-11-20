@@ -8,11 +8,27 @@
     <script src="main.js" defer></script>
   </head>
   <body>
-    <input class="rows" type="number" value="4" />
-    <input class="columns" type="number" value="4" />
-    <button class="createBtn">퍼즐 생성</button>
-    <button>퍼즐 리셋</button>
+    <div class="container">
+      <table class="button__table"></table>
+    </div>
 
-    <table class="buttons"></table>
+    <div>
+      <input
+        class="column"
+        type="number"
+        value="3"
+        min="2"
+        max="8"
+        placeholder="행 입력"
+      />
+      <input
+        class="row"
+        type="number"
+        value="3"
+        min="2"
+        max="8"
+        placeholder="열 입력"
+      />
+    </div>
   </body>
 </html>
