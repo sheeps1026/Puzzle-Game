@@ -1,26 +1,21 @@
 "use strict";
 
-// 리셋을 했을 때 기존 값을 기억하기 위한 변수들
-let defaultColumn = 0;
-let defaultRow = 0;
-let defaultSet = [];
-
 // 퍼즐 생성
-function puzzleCreate() {
+function createPuzzle() {
   // body의 table 태그를 가져와서 안의 값을 리셋
   let buttonTable = document.querySelector(".button__table");
   buttonTable.innerHTML = "";
 
   // 행과 열에 해당 tag에 해당하는 value의 값들을 가져온다
   let column = document.querySelector(".column").value || 0;
-  let row = docuemt.querySelector(".row").value || 0;
+  let row = document.querySelector(".row").value || 0;
 
   for (let columnIndex = 0; columnIndex < column; columnIndex++) {
-    // column의 개수만큼 테이블의 행(tr)을 생성
+    // column의 개수만큼 테이블의 열(tr)을 생성
     let columnBtn = document.createElement("tr");
 
-    for (let rowColumn; rowColumn < row; rowColumn++) {
-      // row의 개수만큼 테이블의 열(td)을 생성
+    for (let rowIndex = 0; rowIndex < row; rowIndex++) {
+      // row의 개수만큼 테이블의 행(td)을 생성
       // 행(tr)의 태그(tr)에 넣는다
       let rowBtn = document.createElement("td");
       let btn = document.createElement("button");
@@ -45,12 +40,9 @@ function puzzleCreate() {
     buttonTable.appendChild(columnBtn);
   }
 
-  // 리셋에 사용하기 위해서 원래 사용했떤 값들을 저장한다.
-  // defaultSet은 처음에 생성했던 배열을 저장해야 하기 때문에 초기화한다.
-  defaultSet = [];
-  defaultColumn = column;
-  defaultRow = row;
-
   // 퍼즐을 랜덤하게 만드는 셔플 함수 만들기
   // shufflePuzzle();
 }
+
+// move
+// 선택한 칸이 있으면 어느 방향이든, 빈 칸이 있는데 거기로 움직여야함

@@ -1,0 +1,20 @@
+.container {
+  text-align: center;
+}
+
+input {
+  width: 100px;
+}
+
+td {
+  height: 100px;
+  width: 100px;
+  background-color: orangered;
+  border: 1px solid black;
+}
+
+.puzzle {
+  height: 100px;
+  width: 100px;
+  font-size: 30px;
+}
