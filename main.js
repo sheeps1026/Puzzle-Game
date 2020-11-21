@@ -23,9 +23,8 @@ function puzzleMove(button) {
 
   // 퍼즐 빈 칸의 포지션을 구한다
   let emptyPosition = numbersList.indexOf("");
-
   // 인접한 cell의 포지션을 구한다
-  let top = (emptyPosition = Number(defaultRow));
+  let top = emptyPosition - Number(defaultRow);
   let left = emptyPosition - 1;
   let right = emptyPosition + 1;
   let bottom = emptyPosition + Number(defaultRow);
@@ -52,6 +51,7 @@ function puzzleMove(button) {
     // 빈 노드를 찾는다
     let empty = document.getElementById("empty");
     // 현재 선택된 button과 빈 칸의 노드를 교환한다
+    swapNode(button, empty);
   }
 }
 
@@ -106,11 +106,12 @@ function createPuzzle() {
       let rowBtn = document.createElement("td");
       let btn = document.createElement("button");
       btn.className = "puzzle";
-      /* // move 함수 만들어야 함
+
+      // puzzleMove 함수
       btn.onclick = function () {
-        move(this);
+        puzzleMove(this);
       };
-      */
+
       if (columnIndex !== column - 1 || rowIndex !== row - 1) {
         //  마지막 칸이 아닌 경우에는 테이블에 버튼을
         rowBtn.appendChild(btn);
@@ -135,9 +136,6 @@ function createPuzzle() {
   puzzleShuffle();
 }
 
-// move
-// 선택한 칸이 있으면 어느 방향이든, 빈 칸이 있는데 거기로 움직여야함
-
 // 퍼즐 리셋
 // 퍼즐을 섞지 않고, defaultSet의 값으로 다시 퍼즐(테이블)을 생성한다
 function puzzleReset() {
@@ -151,11 +149,12 @@ function puzzleReset() {
       let rowBtn = document.createElement("td");
       let btn = document.createElement("button");
       btn.className = "puzzle";
-      /* 마찬가지로 move 함수 만들어야 함
+
+      // puzzleMove 함수
       btn.onclick = function () {
-        move(this);
-      }
-      */
+        puzzleMove(this);
+      };
+
       if (columnIndex != defaultColumn - 1 || rowIndex != defaultRow - 1) {
         rowBtn.appendChild(btn);
       } else {
