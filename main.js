@@ -4,6 +4,49 @@ let defaultColumn = 0;
 let defaultRow = 0;
 let defaultSet = 0;
 
+function puzzleMove(button) {
+  // 버튼이 이동하기 전에, 이동이 가능한 위치인지 확인한다
+  let buttonTable = document.querySelector(".button__table");
+  let rowBtns = buttonTable.querySelectorAll("td");
+  let numbersList = [];
+  for (let i = 0; i < rowBtns.length; i++) {
+    numbersList.push(rowBtns[i].firstChild.innerText);
+  }
+
+  // 퍼즐 빈 칸의 포지션을 구한다
+  let emptyPosition = numbersList.indexOf("");
+
+  // 인접한 cell의 포지션을 구한다
+  let top = (emptyPosition = Number(defaultRow));
+  let left = emptyPosition - 1;
+  let right = emptyPosition + 1;
+  let bottom = emptyPosition + Number(defaultRow);
+
+  // 좌측 끝이나, 우측 끝에 버튼이 위치하면, 아래로 내려가도록 한다
+  if (emptyPosition % defaultRow === 0) {
+    left = -1;
+  }
+
+  if (emptyPosition % defaultRow === defaultRow - 1) {
+    right - 1;
+  }
+
+  // 현재 선택한 버튼의 포지션을 구한다
+  let nowPosition = numbersList.indexOf(button.innerText);
+
+  // 현재 포지션이 top, left, right, bottom 중 하나여야 움직임이 가능하게
+  if (
+    nowPosition === top ||
+    nowPosition === left ||
+    nowPosition === right ||
+    nowPosition === bottom
+  ) {
+    // 빈 노드를 찾는다
+    let empty = document.getElementById("empty");
+    // 현재 선택된 button과 빈 칸의 노드를 교환한다
+  }
+}
+
 // 배열 array의 내부 값들을 Math.random 함수를 이용하여 랜덤하게 섞는다
 function shuffle(array) {
   array.sort(() => Math.random() - 0.5);
