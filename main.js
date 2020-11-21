@@ -52,8 +52,34 @@ function puzzleMove(button) {
     let empty = document.getElementById("empty");
     // 현재 선택된 button과 빈 칸의 노드를 교환한다
     swapNode(button, empty);
+
+    // puzzleCheck();
   }
 }
+
+/*
+// 퍼즐 완성 체크
+function puzzleCheck() {
+  let buttonTable2 = document.querySelector(".button__table");
+  let rowBtns2 = buttonTable2.querySelectorAll("td");
+  let numbersList2 = [];
+
+  for (let i = 0; i < rowBtns2; i++) {
+    numbersList2.push(rowBtns2.firstChild.innerText);
+  }
+  // complete가 true면 완성
+  let complete = true;
+  for (let i = 0; i < numbersList2.length - 1; i++) {
+    if (numbersList2[i] != 1 + 1) {
+      complete = false;
+      break;
+    }
+  }
+  if (complete) {
+    alert("퍼즐이 완성되었습니다");
+  }
+}
+*/
 
 // 배열 array의 내부 값들을 Math.random 함수를 이용하여 랜덤하게 섞는다
 function shuffle(array) {
