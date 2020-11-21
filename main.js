@@ -1,5 +1,40 @@
 "use strict";
 
+let defaultColumn = 0;
+let defaultRow = 0;
+let defaultSet = 0;
+
+// 배열 array의 내부 값들을 Math.random 함수를 이용하여 랜덤하게 섞는다
+function shuffle(array) {
+  array.sort(() => Math.random() - 0.5);
+}
+
+// 퍼즐 섞기
+function puzzleShuffle() {
+  // 퍼즐에 사용할 모든 버튼들을 쿼리한다
+  let buttons = document.querySelectorAll(".puzzle");
+  let numbers = [];
+
+  for (let i = 0; i < buttons.length; i++) {
+    // buttons의 길이 값 만큼의 숫자를 numbers 배열에 삽입
+    numbers.push(i + 1);
+  }
+
+  // shuffle 함수로 numbers의 값을 랜덤하게 재배열
+  shuffle(numbers);
+
+  if (defaultSet.length === 0) {
+    // 처음에 섞인 값을 slice 함수로 복사하여 defaultSet에 넣는다
+    // 나중에 퍼즐 리셋에 사용한다
+    defaultSet = numbers.slice();
+  }
+
+  for (let i = 0; i < buttons.length; i++) {
+    // 각각의 button에 number의 숫자 값들을 넣는다
+    buttons[i].innerText = numbers[i];
+  }
+}
+
 // 퍼즐 생성
 function createPuzzle() {
   // body의 table 태그를 가져와서 안의 값을 리셋
@@ -25,7 +60,7 @@ function createPuzzle() {
         move(this);
       };
       */
-      if (columnIndex != column - 1 || rowIndex != row - 1) {
+      if (columnIndex !== column - 1 || rowIndex !== row - 1) {
         //  마지막 칸이 아닌 경우에는 테이블에 버튼을
         rowBtn.appendChild(btn);
       } else {
@@ -40,8 +75,13 @@ function createPuzzle() {
     buttonTable.appendChild(columnBtn);
   }
 
+  // defaultSet은 처음에 생성했던 배열을 저장하기 때문에 초기화를 해준다.
+  defaultSet = [];
+  defaultColumn = column;
+  defaultRow = row;
+
   // 퍼즐을 랜덤하게 만드는 셔플 함수 만들기
-  // shufflePuzzle();
+  puzzleShuffle();
 }
 
 // move
