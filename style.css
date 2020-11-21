@@ -13,8 +13,12 @@ body {
   width: 100%;
 }
 
+span {
+  margin-bottom: 20px;
+}
+
 .container {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .puzzle {
