@@ -86,3 +86,39 @@ function createPuzzle() {
 
 // move
 // 선택한 칸이 있으면 어느 방향이든, 빈 칸이 있는데 거기로 움직여야함
+
+// 퍼즐 리셋
+// 퍼즐을 섞지 않고, defaultSet의 값으로 다시 퍼즐(테이블)을 생성한다
+function puzzleReset() {
+  let buttonTable = document.querySelector(".button__table");
+  buttonTable.innerHTML = "";
+
+  for (let columnIndex = 0; columnIndex < defaultColumn; columnIndex++) {
+    let columnBtn = document.createElement("tr");
+
+    for (let rowIndex = 0; rowIndex < defaultRow; rowIndex++) {
+      let rowBtn = document.createElement("td");
+      let btn = document.createElement("button");
+      btn.className = "puzzle";
+      /* 마찬가지로 move 함수 만들어야 함
+      btn.onclick = function () {
+        move(this);
+      }
+      */
+      if (columnIndex != defaultColumn - 1 || rowIndex != defaultRow - 1) {
+        rowBtn.appendChild(btn);
+      } else {
+        let span = document.createElement("span");
+        span.id = "empty";
+        rowBtn.appendChild(span);
+      }
+      columnBtn.appendChild(rowBtn);
+    }
+    buttonTable.appendChild(columnBtn);
+  }
+
+  let buttons = document.querySelectorAll(".puzzle");
+  for (let i = 0; i < defaultSet.length; i++) {
+    buttons[i].innerText = defaultSet[i];
+  }
+}
