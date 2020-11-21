@@ -4,6 +4,14 @@ let defaultColumn = 0;
 let defaultRow = 0;
 let defaultSet = 0;
 
+// node1과 node2의 위치를 바꾼다
+function swapNode(node1, node2) {
+  const afterNode2 = node2.nextElementSibling;
+  const parent = node2.parentNode;
+  node1.replaceWith(node2);
+  parent.insertBefore(node1, afterNode2);
+}
+
 function puzzleMove(button) {
   // 버튼이 이동하기 전에, 이동이 가능한 위치인지 확인한다
   let buttonTable = document.querySelector(".button__table");
