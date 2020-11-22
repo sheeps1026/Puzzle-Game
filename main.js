@@ -1,8 +1,32 @@
 "use strict";
 
+//  리셋을 했을 때 기존 값을 기억하기 위한 변수들
 let defaultColumn = 0;
 let defaultRow = 0;
 let defaultSet = 0;
+
+// 이미지 불러오기
+function imageLoad() {
+  let imageButton = document.querySelector(".image__button");
+  imageButton.addEventListener("change", function (e) {
+    // console.log(e.target.files);
+    let image = e.target.files[0]; // 선택된 파일
+    let imageReader = new FileReader();
+    imageReader.readAsDataURL(image); // 파일을 읽는 메서드
+
+    // 파일리더 객체에 readAsDataURL() 메서드를 호출한 뒤 image__button으로 불러들인 파일 정보를 전달인자로 넣는다
+    // 리더객체가 파일을 다 읽으면 동작할 함수 정의
+    imageReader.onload = function () {
+      // background 값을 리더가 데이터 url로 만든 결과값으로 할당
+      let imageFrame = document.createElement("div");
+      imageFrame.style = `background : url(${imageReader.result});
+      background-size : cover`;
+      imageFrame.className = "imageFrame";
+      document.querySelector(".button__table").appendChild(imageFrame);
+      e.target.value = "";
+    };
+  });
+}
 
 // node1과 node2의 위치를 바꾼다
 function swapNode(node1, node2) {
@@ -118,15 +142,15 @@ function createPuzzle() {
   buttonTable.innerHTML = "";
 
   // 행과 열에 해당 tag에 해당하는 value의 값들을 가져온다
-  let column = document.querySelector(".column").value || 0;
-  let row = document.querySelector(".row").value || 0;
+  let row = document.querySelector(".row").value;
+  let column = document.querySelector(".column").value;
 
   for (let columnIndex = 0; columnIndex < column; columnIndex++) {
-    // column의 개수만큼 테이블의 열(tr)을 생성
+    // column의 개수만큼 테이블의 (tr)을 생성
     let columnBtn = document.createElement("tr");
 
     for (let rowIndex = 0; rowIndex < row; rowIndex++) {
-      // row의 개수만큼 테이블의 행(td)을 생성
+      // row의 개수만큼 테이블의 (td)을 생성
       // 행(tr)의 태그(tr)에 넣는다
       let rowBtn = document.createElement("td");
       let btn = document.createElement("button");
@@ -138,7 +162,7 @@ function createPuzzle() {
       };
 
       if (columnIndex !== column - 1 || rowIndex !== row - 1) {
-        //  마지막 칸이 아닌 경우에는 테이블에 버튼을
+        //  마지막 칸이 아닌 경우에는 테이블 셀에 버튼을 추가한다
         rowBtn.appendChild(btn);
       } else {
         // 마지막 칸은 빈 칸으로 있어야 하기에 button 대신에 span 태그를 넣는다.
@@ -149,6 +173,7 @@ function createPuzzle() {
       }
       columnBtn.appendChild(rowBtn);
     }
+
     buttonTable.appendChild(columnBtn);
   }
 
