@@ -5,9 +5,38 @@ let defaultColumn = 0;
 let defaultRow = 0;
 let defaultSet = 0;
 
+/*
 // 이미지 불러오기
 function imageLoad() {
   let imageButton = document.querySelector(".image__button");
+  let row = document.querySelector('')
+
+  imageButton.addEventListener("change", function (e) {
+    // console.log(e.target.files);
+    let image = e.target.files[0]; // 선택된 파일
+    let imageReader = new FileReader();
+    imageReader.readAsDataURL(image); // 파일을 읽는 메서드
+
+    // 파일리더 객체에 readAsDataURL() 메서드를 호출한 뒤 image__button으로 불러들인 파일 정보를 전달인자로 넣는다
+    // 리더객체가 파일을 다 읽으면 동작할 함수 정의
+    imageReader.onload = function () {
+      // background 값을 리더가 데이터 url로 만든 결과값으로 할당
+      let imageFrame = document.createElement("div");
+      imageFrame.style = `background : url(${imageReader.result});
+      background-size : cover`;
+      imageFrame.className = "imageFrame";
+      document.querySelector(".button__table").appendChild(imageFrame);
+      e.target.value = "";
+    };
+  });
+}
+*/
+
+function imageLoad() {
+  let imageButton = document.querySelector(".image__button");
+  let row = document.querySelector(".row").value;
+  let column = document.querySelector(".column").value;
+
   imageButton.addEventListener("change", function (e) {
     // console.log(e.target.files);
     let image = e.target.files[0]; // 선택된 파일
